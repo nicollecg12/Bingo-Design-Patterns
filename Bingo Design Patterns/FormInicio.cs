@@ -24,5 +24,12 @@ namespace Bingo_Design_Patterns
             this.Hide();
 
         }
+
+        private void llbRegistrarse_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FormRegistro formRegistro = new FormRegistro();
+            formRegistro.Show();
+            this.Hide();
+        }
     }
 }

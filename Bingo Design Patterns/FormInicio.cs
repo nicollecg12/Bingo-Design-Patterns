@@ -19,9 +19,36 @@ namespace Bingo_Design_Patterns
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            FormBingo formBingo = new FormBingo();
-            formBingo.Show();
-            this.Hide();
+            string user = txtNombre.Text;
+            string contraseña = txtContraseña.Text;
+            try
+            {
+                bool encontrado = false;
+
+                foreach (var users in GestorUsuarios.Instancia.ObtenerUsuarios())
+                {
+                    if (users.User == user && users.Contraseña == contraseña)
+                    {
+                        encontrado = true;
+                        break;
+                    }
+                }
+
+                if (encontrado)
+                {
+                    FormBingo formBingo = new FormBingo();
+                    formBingo.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Nombre de usuario o contraseña inválidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Error: " + error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 

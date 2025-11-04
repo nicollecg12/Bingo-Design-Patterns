@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBingo));
             this.button2 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
@@ -98,6 +99,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.timerJuego = new System.Windows.Forms.Timer(this.components);
             this.lblTiempo = new System.Windows.Forms.Label();
+            this.lblTipoUsuario = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelBingo.SuspendLayout();
             this.panelBingo2.SuspendLayout();
             this.SuspendLayout();
@@ -110,6 +113,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button7
             // 
@@ -119,6 +123,7 @@
             this.button7.TabIndex = 5;
             this.button7.Text = "button7";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button8
             // 
@@ -128,6 +133,7 @@
             this.button8.TabIndex = 4;
             this.button8.Text = "button8";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button11
             // 
@@ -137,6 +143,7 @@
             this.button11.TabIndex = 9;
             this.button11.Text = "button11";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button12
             // 
@@ -146,6 +153,7 @@
             this.button12.TabIndex = 8;
             this.button12.Text = "button12";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button15
             // 
@@ -155,6 +163,7 @@
             this.button15.TabIndex = 13;
             this.button15.Text = "button15";
             this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button16
             // 
@@ -164,6 +173,7 @@
             this.button16.TabIndex = 12;
             this.button16.Text = "button16";
             this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button19
             // 
@@ -173,6 +183,7 @@
             this.button19.TabIndex = 17;
             this.button19.Text = "button19";
             this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button20
             // 
@@ -182,6 +193,7 @@
             this.button20.TabIndex = 16;
             this.button20.Text = "button20";
             this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button26
             // 
@@ -251,6 +263,7 @@
             this.btnPala.TabIndex = 0;
             this.btnPala.Text = "button1";
             this.btnPala.UseVisualStyleBackColor = true;
+            this.btnPala.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // panelBingo
             // 
@@ -293,6 +306,7 @@
             this.button21.TabIndex = 33;
             this.button21.Text = "button21";
             this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button22
             // 
@@ -302,6 +316,7 @@
             this.button22.TabIndex = 32;
             this.button22.Text = "button22";
             this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button23
             // 
@@ -311,6 +326,7 @@
             this.button23.TabIndex = 31;
             this.button23.Text = "button23";
             this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button24
             // 
@@ -320,6 +336,7 @@
             this.button24.TabIndex = 30;
             this.button24.Text = "button24";
             this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button25
             // 
@@ -329,6 +346,7 @@
             this.button25.TabIndex = 29;
             this.button25.Text = "button25";
             this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button17
             // 
@@ -338,6 +356,7 @@
             this.button17.TabIndex = 28;
             this.button17.Text = "button17";
             this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button13
             // 
@@ -347,6 +366,7 @@
             this.button13.TabIndex = 27;
             this.button13.Text = "button13";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button9
             // 
@@ -356,6 +376,7 @@
             this.button9.TabIndex = 26;
             this.button9.Text = "button9";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button5
             // 
@@ -365,6 +386,7 @@
             this.button5.TabIndex = 25;
             this.button5.Text = "button5";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button4
             // 
@@ -374,6 +396,7 @@
             this.button4.TabIndex = 24;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button18
             // 
@@ -383,6 +406,7 @@
             this.button18.TabIndex = 23;
             this.button18.Text = "button18";
             this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button14
             // 
@@ -392,6 +416,7 @@
             this.button14.TabIndex = 22;
             this.button14.Text = "button14";
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button10
             // 
@@ -401,6 +426,7 @@
             this.button10.TabIndex = 21;
             this.button10.Text = "button10";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button6
             // 
@@ -410,6 +436,7 @@
             this.button6.TabIndex = 20;
             this.button6.Text = "button6";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button3
             // 
@@ -419,6 +446,7 @@
             this.button3.TabIndex = 19;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // panelBingo2
             // 
@@ -461,6 +489,7 @@
             this.button1.TabIndex = 33;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button31
             // 
@@ -470,6 +499,7 @@
             this.button31.TabIndex = 32;
             this.button31.Text = "button31";
             this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button32
             // 
@@ -479,6 +509,7 @@
             this.button32.TabIndex = 31;
             this.button32.Text = "button32";
             this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button33
             // 
@@ -488,6 +519,7 @@
             this.button33.TabIndex = 30;
             this.button33.Text = "button33";
             this.button33.UseVisualStyleBackColor = true;
+            this.button33.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button34
             // 
@@ -497,6 +529,7 @@
             this.button34.TabIndex = 29;
             this.button34.Text = "button34";
             this.button34.UseVisualStyleBackColor = true;
+            this.button34.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button35
             // 
@@ -506,6 +539,7 @@
             this.button35.TabIndex = 28;
             this.button35.Text = "button35";
             this.button35.UseVisualStyleBackColor = true;
+            this.button35.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button36
             // 
@@ -515,6 +549,7 @@
             this.button36.TabIndex = 27;
             this.button36.Text = "button36";
             this.button36.UseVisualStyleBackColor = true;
+            this.button36.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button37
             // 
@@ -524,6 +559,7 @@
             this.button37.TabIndex = 26;
             this.button37.Text = "button37";
             this.button37.UseVisualStyleBackColor = true;
+            this.button37.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button38
             // 
@@ -533,6 +569,7 @@
             this.button38.TabIndex = 25;
             this.button38.Text = "button38";
             this.button38.UseVisualStyleBackColor = true;
+            this.button38.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button39
             // 
@@ -542,6 +579,7 @@
             this.button39.TabIndex = 24;
             this.button39.Text = "button39";
             this.button39.UseVisualStyleBackColor = true;
+            this.button39.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button40
             // 
@@ -551,6 +589,7 @@
             this.button40.TabIndex = 23;
             this.button40.Text = "button40";
             this.button40.UseVisualStyleBackColor = true;
+            this.button40.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button41
             // 
@@ -560,6 +599,7 @@
             this.button41.TabIndex = 22;
             this.button41.Text = "button41";
             this.button41.UseVisualStyleBackColor = true;
+            this.button41.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button42
             // 
@@ -569,6 +609,7 @@
             this.button42.TabIndex = 21;
             this.button42.Text = "button42";
             this.button42.UseVisualStyleBackColor = true;
+            this.button42.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button43
             // 
@@ -578,6 +619,7 @@
             this.button43.TabIndex = 20;
             this.button43.Text = "button43";
             this.button43.UseVisualStyleBackColor = true;
+            this.button43.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button44
             // 
@@ -587,6 +629,7 @@
             this.button44.TabIndex = 19;
             this.button44.Text = "button44";
             this.button44.UseVisualStyleBackColor = true;
+            this.button44.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button45
             // 
@@ -596,6 +639,7 @@
             this.button45.TabIndex = 12;
             this.button45.Text = "button45";
             this.button45.UseVisualStyleBackColor = true;
+            this.button45.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button46
             // 
@@ -605,6 +649,7 @@
             this.button46.TabIndex = 0;
             this.button46.Text = "button1";
             this.button46.UseVisualStyleBackColor = true;
+            this.button46.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button47
             // 
@@ -614,6 +659,7 @@
             this.button47.TabIndex = 4;
             this.button47.Text = "button47";
             this.button47.UseVisualStyleBackColor = true;
+            this.button47.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button48
             // 
@@ -623,6 +669,7 @@
             this.button48.TabIndex = 8;
             this.button48.Text = "button48";
             this.button48.UseVisualStyleBackColor = true;
+            this.button48.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button49
             // 
@@ -632,6 +679,7 @@
             this.button49.TabIndex = 16;
             this.button49.Text = "button49";
             this.button49.UseVisualStyleBackColor = true;
+            this.button49.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button50
             // 
@@ -641,6 +689,7 @@
             this.button50.TabIndex = 9;
             this.button50.Text = "button50";
             this.button50.UseVisualStyleBackColor = true;
+            this.button50.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button51
             // 
@@ -650,6 +699,7 @@
             this.button51.TabIndex = 1;
             this.button51.Text = "button51";
             this.button51.UseVisualStyleBackColor = true;
+            this.button51.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button52
             // 
@@ -659,6 +709,7 @@
             this.button52.TabIndex = 5;
             this.button52.Text = "button52";
             this.button52.UseVisualStyleBackColor = true;
+            this.button52.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button53
             // 
@@ -668,6 +719,7 @@
             this.button53.TabIndex = 13;
             this.button53.Text = "button53";
             this.button53.UseVisualStyleBackColor = true;
+            this.button53.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button54
             // 
@@ -677,6 +729,7 @@
             this.button54.TabIndex = 17;
             this.button54.Text = "button54";
             this.button54.UseVisualStyleBackColor = true;
+            this.button54.Click += new System.EventHandler(this.BotonBingo_Click);
             // 
             // button55
             // 
@@ -781,7 +834,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Yellow;
+            this.label2.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.label2.Location = new System.Drawing.Point(491, 87);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(177, 57);
@@ -794,7 +847,7 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.label3.Font = new System.Drawing.Font("Stencil", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Gold;
+            this.label3.ForeColor = System.Drawing.Color.Cyan;
             this.label3.Location = new System.Drawing.Point(942, 87);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(202, 57);
@@ -817,12 +870,38 @@
             this.lblTiempo.Size = new System.Drawing.Size(0, 20);
             this.lblTiempo.TabIndex = 46;
             // 
+            // lblTipoUsuario
+            // 
+            this.lblTipoUsuario.AutoSize = true;
+            this.lblTipoUsuario.BackColor = System.Drawing.Color.Transparent;
+            this.lblTipoUsuario.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTipoUsuario.ForeColor = System.Drawing.Color.White;
+            this.lblTipoUsuario.Location = new System.Drawing.Point(60, 217);
+            this.lblTipoUsuario.Name = "lblTipoUsuario";
+            this.lblTipoUsuario.Size = new System.Drawing.Size(83, 12);
+            this.lblTipoUsuario.TabIndex = 47;
+            this.lblTipoUsuario.Text = "Usuario Local";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(1416, 217);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(113, 12);
+            this.label1.TabIndex = 48;
+            this.label1.Text = "Oponente Aleatorio";
+            // 
             // FormBingo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Bingo_Design_Patterns.Properties.Resources.Fondobingovacio;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1607, 771);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTipoUsuario);
             this.Controls.Add(this.lblTiempo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -922,5 +1001,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Timer timerJuego;
         private System.Windows.Forms.Label lblTiempo;
+        private System.Windows.Forms.Label lblTipoUsuario;
+        private System.Windows.Forms.Label label1;
     }
 }

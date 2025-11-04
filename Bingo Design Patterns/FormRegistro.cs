@@ -38,7 +38,7 @@ namespace Bingo_Design_Patterns
 
             try
             {
-                if (!int.TryParse(txtNumeroTelefonico.Text, out _ ))
+                if (!long.TryParse(txtNumeroTelefonico.Text, out _ ))
                 {
                     MessageBox.Show("El número telefonico solo puede contener caracteres numéricos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;

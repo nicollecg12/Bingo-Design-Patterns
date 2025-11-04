@@ -34,7 +34,7 @@ namespace Bingo_Design_Patterns
             string user = txtNombreUsuario.Text;
             string contraseña = txtContraseña.Text;
 
-
+        
 
             try
             {

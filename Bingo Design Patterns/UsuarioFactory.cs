@@ -8,15 +8,15 @@ namespace Bingo_Design_Patterns
 {
     public class UsuarioFactory
     {
-        public static Usuario CrearUsuario(string nombre, string numero, string user, string contraseña, string tipo) 
+        public static Usuario CrearUsuario(string nombre, int edad, string numero, string user, string contraseña, string tipo) 
         {
             if (tipo == "Jugador")
             {
-                return new Jugador(nombre, numero, user, contraseña);
+                return new Jugador(nombre, edad, numero, user, contraseña);
             }
             if (tipo == "Administrador")
             {
-                return new Administrador(nombre, numero, user, contraseña);
+                return new Administrador(nombre, edad, numero, user, contraseña);
             }
             else
             {

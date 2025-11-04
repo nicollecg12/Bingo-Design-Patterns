@@ -10,11 +10,12 @@ namespace Bingo_Design_Patterns
     public abstract class Usuario
     {
         public string Nombre { get; set; }
+        public int Edad { get; set; }
         public string Numero { get; set; }
         public string User { get; set; }
         public string Contraseña { get; set; }
 
-        public Usuario(string nombre, string numero, string user, string contraseña)
+        public Usuario(string nombre, int edad,string numero, string user, string contraseña)
         {
 
             if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(user)|| string.IsNullOrWhiteSpace(contraseña)|| string.IsNullOrWhiteSpace(numero))
@@ -29,12 +30,17 @@ namespace Bingo_Design_Patterns
             {
                 throw new ArgumentException("El nombre de usuario debe contener al menos 3 caracteres");
             }
+            if (edad < 12)
+            {
+                throw new ArgumentException("Debe tener al menos 12 años");
+            }
            
 
             Nombre = nombre;
             Numero = numero;
             User = user;
             Contraseña = contraseña;
+            Edad = edad;
         }
 
         public abstract string VerificarCreacion();

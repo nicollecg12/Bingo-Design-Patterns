@@ -36,12 +36,14 @@
             this.lblTipoUsuario = new System.Windows.Forms.Label();
             this.txtContraseña = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtNombre = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.txtEdad = new System.Windows.Forms.TextBox();
+            this.lblEdad = new System.Windows.Forms.Label();
             this.txtNumeroTelefonico = new System.Windows.Forms.TextBox();
             this.lblNumeroTelefonico = new System.Windows.Forms.Label();
             this.btnRegistrarse = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtNombreUsuario
@@ -80,7 +82,7 @@
             // 
             this.cboTipoUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboTipoUsuario.FormattingEnabled = true;
-            this.cboTipoUsuario.Location = new System.Drawing.Point(227, 206);
+            this.cboTipoUsuario.Location = new System.Drawing.Point(227, 151);
             this.cboTipoUsuario.Name = "cboTipoUsuario";
             this.cboTipoUsuario.Size = new System.Drawing.Size(179, 26);
             this.cboTipoUsuario.TabIndex = 5;
@@ -91,7 +93,7 @@
             this.lblTipoUsuario.BackColor = System.Drawing.Color.Transparent;
             this.lblTipoUsuario.Font = new System.Drawing.Font("MV Boli", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTipoUsuario.ForeColor = System.Drawing.Color.White;
-            this.lblTipoUsuario.Location = new System.Drawing.Point(91, 210);
+            this.lblTipoUsuario.Location = new System.Drawing.Point(91, 155);
             this.lblTipoUsuario.Name = "lblTipoUsuario";
             this.lblTipoUsuario.Size = new System.Drawing.Size(130, 20);
             this.lblTipoUsuario.TabIndex = 6;
@@ -117,25 +119,25 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Contraseña";
             // 
-            // txtNombre
+            // txtEdad
             // 
-            this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.Location = new System.Drawing.Point(227, 264);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(179, 24);
-            this.txtNombre.TabIndex = 10;
+            this.txtEdad.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEdad.Location = new System.Drawing.Point(227, 209);
+            this.txtEdad.Name = "txtEdad";
+            this.txtEdad.Size = new System.Drawing.Size(179, 24);
+            this.txtEdad.TabIndex = 10;
             // 
-            // label3
+            // lblEdad
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("MV Boli", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(74, 268);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(147, 20);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Nombre completo";
+            this.lblEdad.AutoSize = true;
+            this.lblEdad.BackColor = System.Drawing.Color.Transparent;
+            this.lblEdad.Font = new System.Drawing.Font("MV Boli", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEdad.ForeColor = System.Drawing.Color.White;
+            this.lblEdad.Location = new System.Drawing.Point(176, 211);
+            this.lblEdad.Name = "lblEdad";
+            this.lblEdad.Size = new System.Drawing.Size(45, 20);
+            this.lblEdad.TabIndex = 9;
+            this.lblEdad.Text = "Edad";
             // 
             // txtNumeroTelefonico
             // 
@@ -183,18 +185,40 @@
             this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // txtNombre
+            // 
+            this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombre.Location = new System.Drawing.Point(227, 265);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(179, 24);
+            this.txtNombre.TabIndex = 16;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("MV Boli", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(74, 269);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(147, 20);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Nombre completo";
+            // 
             // FormRegistro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(751, 503);
+            this.Controls.Add(this.txtNombre);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnRegistrarse);
             this.Controls.Add(this.txtNumeroTelefonico);
             this.Controls.Add(this.lblNumeroTelefonico);
-            this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtEdad);
+            this.Controls.Add(this.lblEdad);
             this.Controls.Add(this.txtContraseña);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTipoUsuario);
@@ -219,11 +243,13 @@
         private System.Windows.Forms.Label lblTipoUsuario;
         private System.Windows.Forms.TextBox txtContraseña;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtEdad;
+        private System.Windows.Forms.Label lblEdad;
         private System.Windows.Forms.TextBox txtNumeroTelefonico;
         private System.Windows.Forms.Label lblNumeroTelefonico;
         private System.Windows.Forms.Button btnRegistrarse;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.Label label4;
     }
 }

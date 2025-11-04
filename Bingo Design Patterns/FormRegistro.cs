@@ -38,7 +38,7 @@ namespace Bingo_Design_Patterns
 
             try
             {
-                if (!long.TryParse(numero, out _))
+                if (!int.TryParse(txtNumeroTelefonico.Text, out _ ))
                 {
                     MessageBox.Show("El número telefonico solo puede contener caracteres numéricos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -49,6 +49,11 @@ namespace Bingo_Design_Patterns
                     return;
 
                 }
+                if (!int.TryParse(txtEdad.Text, out int edad))
+                {
+                    MessageBox.Show("La edad solo puede contener caracteres numéricos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return ;
+                }
                 foreach (var users in GestorUsuarios.Instancia.ObtenerUsuarios())
                 {
                     if (users.User == user)
@@ -57,7 +62,7 @@ namespace Bingo_Design_Patterns
                         return;
                     }
                 }
-                Usuario nuevo = UsuarioFactory.CrearUsuario(nombre, numero, user, contraseña, tipo);
+                Usuario nuevo = UsuarioFactory.CrearUsuario(nombre, edad,numero, user, contraseña, tipo);
                 GestorUsuarios.Instancia.AgregarUsuario(nuevo);
                 MessageBox.Show(nuevo.VerificarCreacion(), "Atención",MessageBoxButtons.OK, MessageBoxIcon.Information);
 

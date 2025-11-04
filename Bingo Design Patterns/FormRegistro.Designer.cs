@@ -28,27 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtNombre = new System.Windows.Forms.TextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRegistro));
+            this.txtNombreUsuario = new System.Windows.Forms.TextBox();
             this.lblNombre = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cboTipoUsuario = new System.Windows.Forms.ComboBox();
             this.lblTipoUsuario = new System.Windows.Forms.Label();
             this.txtContraseña = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtNombre = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtNumeroTelefonico = new System.Windows.Forms.TextBox();
             this.lblNumeroTelefonico = new System.Windows.Forms.Label();
             this.btnRegistrarse = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // txtNombre
+            // txtNombreUsuario
             // 
-            this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.Location = new System.Drawing.Point(227, 373);
-            this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(179, 24);
-            this.txtNombre.TabIndex = 3;
+            this.txtNombreUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombreUsuario.Location = new System.Drawing.Point(227, 373);
+            this.txtNombreUsuario.Name = "txtNombreUsuario";
+            this.txtNombreUsuario.Size = new System.Drawing.Size(179, 24);
+            this.txtNombreUsuario.TabIndex = 3;
             // 
             // lblNombre
             // 
@@ -115,13 +117,13 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Contraseña";
             // 
-            // textBox1
+            // txtNombre
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(227, 264);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(179, 24);
-            this.textBox1.TabIndex = 10;
+            this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNombre.Location = new System.Drawing.Point(227, 264);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(179, 24);
+            this.txtNombre.TabIndex = 10;
             // 
             // label3
             // 
@@ -168,23 +170,37 @@
             this.btnRegistrarse.UseVisualStyleBackColor = false;
             this.btnRegistrarse.Click += new System.EventHandler(this.btnRegistrarse_Click);
             // 
+            // btnSalir
+            // 
+            this.btnSalir.BackColor = System.Drawing.Color.Firebrick;
+            this.btnSalir.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.ForeColor = System.Drawing.Color.White;
+            this.btnSalir.Location = new System.Drawing.Point(577, 427);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(95, 33);
+            this.btnSalir.TabIndex = 14;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // FormRegistro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Bingo_Design_Patterns.Properties.Resources.FondoBingoRegistro;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(751, 503);
+            this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnRegistrarse);
             this.Controls.Add(this.txtNumeroTelefonico);
             this.Controls.Add(this.lblNumeroTelefonico);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtContraseña);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTipoUsuario);
             this.Controls.Add(this.cboTipoUsuario);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtNombre);
+            this.Controls.Add(this.txtNombreUsuario);
             this.Controls.Add(this.lblNombre);
             this.Name = "FormRegistro";
             this.Text = "FormRegistro";
@@ -196,17 +212,18 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.TextBox txtNombreUsuario;
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cboTipoUsuario;
         private System.Windows.Forms.Label lblTipoUsuario;
         private System.Windows.Forms.TextBox txtContraseña;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtNumeroTelefonico;
         private System.Windows.Forms.Label lblNumeroTelefonico;
         private System.Windows.Forms.Button btnRegistrarse;
+        private System.Windows.Forms.Button btnSalir;
     }
 }

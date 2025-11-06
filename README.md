@@ -24,6 +24,7 @@ se marcará de color verde, y dará click en "Nueva Frase", para continuar a la 
 Integrantes y roles
 --
 Nicolle Carvajal Gómez | Desarrollo de interfaz y lógica del programa
+
 Samuel Machado Espitia | Desarrollo de base de datos 
 
 Ruta del script SQL

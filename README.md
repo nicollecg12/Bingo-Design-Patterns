@@ -25,7 +25,7 @@ Integrantes y roles
 --
 Nicolle Carvajal Gómez | Desarrollo de interfaz y lógica del programa
 
-Samuel Machado Espitia | Desarrollo de base de datos 
+Samuel Machado Espitia | Desarrollo y conexión de la base de datos 
 
 Ruta del script SQL
 --

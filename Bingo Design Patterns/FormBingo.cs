@@ -14,6 +14,9 @@ namespace Bingo_Design_Patterns
         private string patronCorrecto;
         private Random random = new Random();
         private int segundosJugados = 0;
+        private Button[,] botonesJugador;       
+        private Button[,] botonesMaquina;   
+        private const int TAM = 5;
 
         public FormBingo()
         {
@@ -101,8 +104,150 @@ namespace Bingo_Design_Patterns
                 }
             }
 
+
+
+
+            InicializarMatricesDeBotones();
             NuevaFraseAleatoria();
             timerJuego.Start();
+        }
+
+        private void InicializarMatricesDeBotones()
+        {
+            // Crea matrices
+            botonesJugador = new Button[TAM, TAM];
+            botonesMaquina = new Button[TAM, TAM];
+
+            // Rellenar la matriz leyendo controles en el orden en que están añadidos al Panel.
+            // Se asume orden: fila0col0, fila0col1, ..., fila0col4, fila1col0, ...
+            // Si tu Layout de panel no respeta ese orden, podrías ordenarlos por posición (Top, Left).
+            var botonesPanelJugador = panelBingo.Controls.OfType<Button>().OrderBy(b => b.Top).ThenBy(b => b.Left).ToList();
+            var botonesPanelMaquina = panelBingo2.Controls.OfType<Button>().OrderBy(b => b.Top).ThenBy(b => b.Left).ToList();
+
+            // Rellenar matriz jugador
+            for (int i = 0; i < Math.Min(botonesPanelJugador.Count, TAM * TAM); i++)
+            {
+                int fila = i / TAM;
+                int col = i % TAM;
+                botonesJugador[fila, col] = botonesPanelJugador[i];
+            }
+
+            // Rellenar matriz máquina
+            for (int i = 0; i < Math.Min(botonesPanelMaquina.Count, TAM * TAM); i++)
+            {
+                int fila = i / TAM;
+                int col = i % TAM;
+                botonesMaquina[fila, col] = botonesPanelMaquina[i];
+            }
+        }
+
+        private bool VerificarBingoPorFila(Button[,] matriz)
+        {
+            for (int fila = 0; fila < TAM; fila++)
+            {
+                if (FilaCompleta(matriz, fila))
+                    return true;
+            }
+            return false;
+        }
+
+        private bool FilaCompleta(Button[,] matriz, int fila)
+        {
+            for (int col = 0; col < TAM; col++)
+            {
+                var btn = matriz[fila, col];
+                if (btn == null) return false;      // defensivo
+                                                    // consideramos marcado si está deshabilitado (como en tu lógica)
+                if (btn.Enabled) return false;
+            }
+            return true;
+        }
+
+        // Cuando haya bingo, detener juego y notificar
+        private void ManejarVictoria(string mensaje)
+        {
+            timerJuego.Stop();
+            DeshabilitarTableros();
+
+            DialogResult resultado = MessageBox.Show(
+                mensaje + "\n\n¿Quieres volver a jugar?",
+                "BINGO",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Information
+            );
+
+            if (resultado == DialogResult.Yes)
+            {
+                ReiniciarJuego();
+            }
+            else
+            {
+                // ✅ Puedes volver al inicio o cerrar la ventana:
+                FormInicio f = new FormInicio();
+                f.Show();
+                this.Close();   // o this.Hide();
+            }
+        }
+        private void ReiniciarJuego()
+        {
+            segundosJugados = 0;
+            lblTiempo.Text = "Tiempo: 00:00";
+
+            // Habilitar botones y poner color normal
+            foreach (var b in botonesJugador)
+            {
+                if (b != null)
+                {
+                    b.Enabled = true;
+                    b.BackColor = SystemColors.Control;
+                }
+            }
+
+            foreach (var b in botonesMaquina)
+            {
+                if (b != null)
+                {
+                    b.Enabled = true;
+                    b.BackColor = SystemColors.Control;
+                }
+            }
+
+            // Rebarajar paneles
+            FormBingo_Load(null, null);
+
+            NuevaFraseAleatoria();
+            timerJuego.Start();
+        }
+
+        private void DeshabilitarTableros()
+        {
+            foreach (var b in botonesJugador)
+                if (b != null) b.Enabled = false;
+            foreach (var b in botonesMaquina)
+                if (b != null) b.Enabled = false;
+        }
+
+        private void MarcarEnMaquina(string patron)
+        {
+            foreach (Control ctr in panelBingo2.Controls)
+            {
+                if (ctr is Button btn)
+                {
+                    string tag = btn.Tag as string;
+                    if (tag == patron && btn.Enabled)
+                    {
+                        btn.BackColor = Color.LightGreen;
+                        btn.Enabled = false;
+                        break;
+                    }
+                }
+            }
+
+            // Verificamos si la máquina hizo BINGO por fila
+            if (VerificarBingoPorFila(botonesMaquina))
+            {
+                ManejarVictoria("La máquina hizo BINGO (fila completada).");
+            }
         }
 
         private void NuevaFraseAleatoria()
@@ -155,21 +300,29 @@ namespace Bingo_Design_Patterns
         }
 
         private void BotonBingo_Click(object sender, EventArgs e)
-        {
+        {       
             if (!(sender is Button boton)) return;
-
             if (!boton.Enabled) return;
 
             string patronDelBoton = boton.Tag as string;
 
-            if (patronDelBoton == patronCorrecto)
+            if (string.Equals(patronDelBoton, patronCorrecto))
             {
                 boton.BackColor = Color.LightGreen;
                 boton.Enabled = false;
 
+                // Marcar también en la máquina (tu método ya lo hace)
                 MarcarEnMaquina(patronCorrecto);
 
+                // Verificar si el jugador hizo BINGO por fila
+                if (VerificarBingoPorFila(botonesJugador))
+                {
+                    ManejarVictoria("¡Correcto! Hiciste BINGO (fila completada).");
+                    return;
+                }
+
                 MessageBox.Show("¡Correcto!", "Felicitaciones", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 NuevaFraseAleatoria();
                 this.Invalidate();
             }
@@ -179,21 +332,6 @@ namespace Bingo_Design_Patterns
             }
         }
 
-        private void MarcarEnMaquina(string patron)
-        {
-            foreach (Control ctr in panelBingo2.Controls)
-            {
-                if (ctr is Button btn)
-                {
-                    string tag = btn.Tag as string;
-                    if (tag == patron && btn.Enabled)
-                    {
-                        btn.BackColor = Color.LightGreen;
-                        btn.Enabled = false;
-                        break;
-                    }
-                }
-            }
-        }
+       
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,12 +13,10 @@ namespace Bingo_Design_Patterns
 {
     public partial class FormRegistro : Form
     {
+       
         public FormRegistro()
         {
-            InitializeComponent();
-            cboTipoUsuario.Items.Add("Jugador");
-            cboTipoUsuario.Items.Add("Administrador");
-            cboTipoUsuario.SelectedIndex = -1;
+            InitializeComponent();   
 
         }
 
@@ -28,12 +27,12 @@ namespace Bingo_Design_Patterns
 
         private void btnRegistrarse_Click(object sender, EventArgs e)
         {
-            string tipo = cboTipoUsuario.Text;
+            string tipo = "Jugador";
             string nombre = txtNombre.Text;
             string numero = txtNumeroTelefonico.Text;
             string user = txtNombreUsuario.Text;
             string contraseña = txtContraseña.Text;
-
+            string correo = txtCorreo.Text;
         
 
             try
@@ -54,6 +53,7 @@ namespace Bingo_Design_Patterns
                     MessageBox.Show("La edad solo puede contener caracteres numéricos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return ;
                 }
+
                 foreach (var users in GestorUsuarios.Instancia.ObtenerUsuarios())
                 {
                     if (users.User == user)
@@ -62,9 +62,36 @@ namespace Bingo_Design_Patterns
                         return;
                     }
                 }
+
                 Usuario nuevo = UsuarioFactory.CrearUsuario(nombre, edad,numero, user, contraseña, tipo);
-                GestorUsuarios.Instancia.AgregarUsuario(nuevo);
-                MessageBox.Show(nuevo.VerificarCreacion(), "Atención",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                SqlConnection cn = ConexionBD.CrearInstancia().CrearConexion();
+
+                SqlCommand cmd = new SqlCommand("sp_RegistrarUsuario", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@NombreCompleto", nuevo.Nombre);                
+                cmd.Parameters.AddWithValue("@LoginName", nuevo.User);
+                cmd.Parameters.AddWithValue("@ContrasenaHash", nuevo.Contraseña);
+                cmd.Parameters.AddWithValue("@Rol", nuevo.Tipo);
+                cmd.Parameters.AddWithValue("@Edad", nuevo.Edad);
+                cmd.Parameters.AddWithValue("@telefono", nuevo.Numero);
+
+                try
+                {
+                    cn.Open();
+                    cmd.ExecuteNonQuery();
+                    GestorUsuarios.Instancia.ObtenerUsuarios();
+                    MessageBox.Show(nuevo.VerificarCreacion(), "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al registrar usuario: " + ex.Message);
+                }
+                finally
+                {
+                    cn.Close();
+                }
+                
 
                 FormInicio formInicio = new FormInicio();
                 formInicio.Show();
@@ -81,6 +108,11 @@ namespace Bingo_Design_Patterns
             FormInicio frm = new FormInicio();
             frm.Show();
             this.Hide();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

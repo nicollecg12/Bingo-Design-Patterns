@@ -9,7 +9,7 @@ namespace Bingo_Design_Patterns
 {
     public class Administrador: Usuario
     {
-        public Administrador(string nombre, int edad,string numero, string user, string contraseña) : base(nombre, edad,numero, user, contraseña)
+        public Administrador(string nombre, int edad,string numero, string user, string contraseña,string tipo) : base(nombre, edad,numero, user, contraseña,tipo)
         {
         }
         public override string VerificarCreacion()

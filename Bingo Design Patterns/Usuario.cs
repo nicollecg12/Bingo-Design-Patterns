@@ -9,13 +9,25 @@ namespace Bingo_Design_Patterns
 {
     public abstract class Usuario
     {
-        public string Nombre { get; set; }
-        public int Edad { get; set; }
-        public string Numero { get; set; }
-        public string User { get; set; }
-        public string Contraseña { get; set; }
+        private int idUsuario;
+        private string nombre;
+        private int edad;
+        private string numero;
+        private string user;
+        private string contraseña;
+        private string tipo;
+        
+        public string Nombre { get => nombre; set => nombre = value; }
+        public int Edad { get => edad; set => edad = value; }
+        public string Numero { get => numero; set => numero = value; }
+        public string User { get => user; set => user = value; }
+        public string Contraseña { get => contraseña; set => contraseña = value; }
+        public string Tipo { get => tipo; set => tipo = value; }
+        public int IdUsuario { get => idUsuario; set => idUsuario = value; }
 
-        public Usuario(string nombre, int edad,string numero, string user, string contraseña)
+        public Usuario() { }
+
+        public Usuario(string nombre, int edad,string numero, string user, string contraseña,string Tipo)
         {
 
             if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(user)|| string.IsNullOrWhiteSpace(contraseña)|| string.IsNullOrWhiteSpace(numero))
@@ -41,7 +53,11 @@ namespace Bingo_Design_Patterns
             User = user;
             Contraseña = contraseña;
             Edad = edad;
+            tipo = Tipo;
+            
         }
+
+
 
         public abstract string VerificarCreacion();
         

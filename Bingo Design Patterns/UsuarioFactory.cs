@@ -12,11 +12,11 @@ namespace Bingo_Design_Patterns
         {
             if (tipo == "Jugador")
             {
-                return new Jugador(nombre, edad, numero, user, contraseña);
+                return new Jugador(nombre, edad, numero, user, contraseña,tipo);
             }
             if (tipo == "Administrador")
             {
-                return new Administrador(nombre, edad, numero, user, contraseña);
+                return new Administrador(nombre, edad, numero, user, contraseña,tipo);
             }
             else
             {

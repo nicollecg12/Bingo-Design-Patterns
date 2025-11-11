@@ -23,16 +23,7 @@ namespace Bingo_Design_Patterns
             string contraseña = txtContraseña.Text;
             try
             {
-                bool encontrado = false;
-
-                foreach (var users in GestorUsuarios.Instancia.ObtenerUsuarios())
-                {
-                    if (users.User == user && users.Contraseña == contraseña)
-                    {
-                        encontrado = true;
-                        break;
-                    }
-                }
+               bool encontrado = GestorUsuarios.Instancia.ObtenerUsuarios().Any(u => u.User == user && u.Contraseña == contraseña); ;
 
                 if (encontrado)
                 {

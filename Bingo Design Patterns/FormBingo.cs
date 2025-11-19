@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,7 +10,8 @@ namespace Bingo_Design_Patterns
 {
     public partial class FormBingo : Form
     {
-        private Dictionary<string, string> patrones;
+        SqlConnection cn = ConexionBD.CrearInstancia().CrearConexion();
+        Dictionary<string, string> patrones = new Dictionary<string, string>();
         private string fraseActual;
         private string patronCorrecto;
         private Random random = new Random();
@@ -17,44 +19,33 @@ namespace Bingo_Design_Patterns
         private Button[,] botonesJugador;       
         private Button[,] botonesMaquina;   
         private const int TAM = 5;
+        string login;
+        int idJugador;
+        int idPartida;
+        Partida nueva = new Partida();
 
-        public FormBingo()
+
+        public FormBingo(string loginName)
         {
             InitializeComponent();
+            login = loginName;
+            cn.Open();
+         
+            
+            string query = "SELECT palabra, frase FROM Palabra";
 
-            patrones = new Dictionary<string, string>
+            using (SqlCommand cmd = new SqlCommand(query, cn))
+            using (SqlDataReader reader = cmd.ExecuteReader())
             {
-                { "Singleton", "Permite una única instancia global del objeto." },
-                { "Factory Method", "Crea objetos de distintos tipos sin especificar la clase exacta." },
-                { "Strategy", "Permite cambiar el comportamiento de un algoritmo en tiempo de ejecución." },
-                { "Observer", "Permite que los objetos se suscriban a eventos de otros objetos." },
-                { "Command", "Encapsula una acción o solicitud como un objeto independiente." },
-                { "Decorator", "Agrega funcionalidades sin modificar el código original." },
-                { "Adapter", "Convierte la interfaz de una clase en otra que el cliente espera." },
-                { "State", "Permite que un objeto cambie su comportamiento cuando cambia su estado interno." },
-                { "Template Method", "Define el esqueleto de un algoritmo y deja que las subclases implementen los detalles." },
-                { "MVC", "Patrón arquitectónico que separa modelo, vista y controlador." },
-                { "Prototype", "Crea nuevos objetos copiando un prototipo existente." },
-                { "Builder", "Permite construir objetos complejos paso a paso." },
-                { "Mediator", "Facilita la comunicación entre múltiples objetos sin acoplarlos directamente." },
-                { "Facade", "Proporciona una interfaz unificada para un conjunto de interfaces en un sistema." },
-                { "Composite", "Combina objetos en estructuras jerárquicas para tratarlos de forma uniforme." },
-                { "God Object", "Objeto que concentra demasiadas responsabilidades." },
-                { "Spaghetti Code", "Código con estructura desordenada y difícil de mantener." },
-                { "Duplicate Code", "Repetición innecesaria de código idéntico o similar." },
-                { "Hard Coding", "Valores escritos directamente en el código en lugar de usar constantes." },
-                { "Lava Flow", "Código antiguo que sigue presente por miedo a eliminarlo." },
-                { "Golden Hammer", "Uso excesivo de una herramienta o patrón en todos los casos posibles." },
-                { "Copy-Paste Programming", "Copiar y pegar código en lugar de reutilizarlo correctamente." },
-                { "Shotgun Surgery", "Modificar un módulo obliga a cambiar muchos otros." },
-                { "Feature Envy", "Una clase muestra demasiado interés en los datos de otra clase." },
-                { "Premature Optimization", "Optimización prematura que complica el código innecesariamente." },
-                { "Magic Numbers", "Uso de números sin explicación ni contexto." },
-                { "God Method", "Método extremadamente largo y con demasiadas responsabilidades." },
-                { "Circular Dependency", "Dos o más clases se dependen mutuamente de forma circular." },
-                { "Boat Anchor", "Recurso que ya no se usa pero sigue presente en el sistema." },
-                { "Poltergeist", "Objeto que solo existe para pasar datos entre otros sin lógica útil." }
-            };
+                while (reader.Read())
+                {
+                    string nombre = reader.GetString(0);
+                    string descripcion = reader.GetString(1);
+
+                    patrones[nombre] = descripcion;
+                }
+            }
+       
         }
 
         private void FormBingo_Load(object sender, EventArgs e)
@@ -104,14 +95,52 @@ namespace Bingo_Design_Patterns
                 }
             }
 
-
-
+            dgvPatrones.Columns.Add("Patron", "Patrón Correcto");
+            EstilizarDataGridView();
 
             InicializarMatricesDeBotones();
             NuevaFraseAleatoria();
             timerJuego.Start();
         }
 
+        private void EstilizarDataGridView()
+        {
+            var dgv = dgvPatrones;
+
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.BackgroundColor = Color.FromArgb(5, 50, 80);         // Fondo igual a tu tema azul
+            dgv.GridColor = Color.FromArgb(180, 220, 240);           // Líneas suaves
+
+            dgv.EnableHeadersVisualStyles = false;
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(0, 120, 200);
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            dgv.ColumnHeadersHeight = 32;
+
+            dgv.DefaultCellStyle.BackColor = Color.White;
+            dgv.DefaultCellStyle.ForeColor = Color.Black;
+            dgv.DefaultCellStyle.SelectionBackColor = Color.FromArgb(0, 160, 230);
+            dgv.DefaultCellStyle.SelectionForeColor = Color.White;
+            dgv.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+
+            dgv.RowTemplate.Height = 28;
+            dgv.RowHeadersVisible = false;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+
+            dgv.AllowUserToResizeRows = false;
+            dgv.AllowUserToResizeColumns = false;
+
+            // Bordes suaves con padding visual
+            dgv.DefaultCellStyle.Padding = new Padding(4, 4, 4, 4);
+
+            dgv.ScrollBars = ScrollBars.Vertical;
+
+            // Quitar bordes feos
+            dgv.AdvancedCellBorderStyle.Top = DataGridViewAdvancedCellBorderStyle.None;
+            dgv.AdvancedCellBorderStyle.Left = DataGridViewAdvancedCellBorderStyle.None;
+            dgv.AdvancedCellBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
+            dgv.AdvancedCellBorderStyle.Bottom = DataGridViewAdvancedCellBorderStyle.Single;
+        }
         private void InicializarMatricesDeBotones()
         {
             // Crea matrices
@@ -163,7 +192,7 @@ namespace Bingo_Design_Patterns
             return true;
         }
 
-        // Cuando haya bingo, detener juego y notificar
+        
         private void ManejarVictoria(string mensaje)
         {
             timerJuego.Stop();
@@ -182,10 +211,10 @@ namespace Bingo_Design_Patterns
             }
             else
             {
-                // ✅ Puedes volver al inicio o cerrar la ventana:
+                
                 FormInicio f = new FormInicio();
                 f.Show();
-                this.Close();   // o this.Hide();
+                this.Close();   
             }
         }
         private void ReiniciarJuego()
@@ -229,6 +258,7 @@ namespace Bingo_Design_Patterns
 
         private void MarcarEnMaquina(string patron)
         {
+            cn.Close();
             foreach (Control ctr in panelBingo2.Controls)
             {
                 if (ctr is Button btn)
@@ -243,11 +273,67 @@ namespace Bingo_Design_Patterns
                 }
             }
 
+            cn.Open();
+            string query = "SELECT id_jugador FROM Usuario WHERE loginName = @loginName";
+
+            using (SqlCommand cmd = new SqlCommand(query, cn))
+            {
+                cmd.Parameters.AddWithValue("@loginName", login);
+
+                object result = cmd.ExecuteScalar();
+
+                if (result != null)
+                    idJugador = Convert.ToInt32(result);
+            }
+
             // Verificamos si la máquina hizo BINGO por fila
             if (VerificarBingoPorFila(botonesMaquina))
             {
-                ManejarVictoria("La máquina hizo BINGO (fila completada).");
+
+                ManejarVictoria("La máquina hizo BINGO (fila completada).");           
+                string estado = "Completada";
+
+                SqlCommand cmd2 = new SqlCommand("sp_RegistroPartida", cn);
+                cmd2.CommandType = CommandType.StoredProcedure;
+
+                cmd2.Parameters.AddWithValue("@estado", estado);
+
+                try
+                {
+                    using (SqlDataReader reader = cmd2.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            nueva.IdPartida = Convert.ToInt32(reader["IdPartida"]);
+                            nueva.Estado = reader["Estado"].ToString();
+                            nueva.Fecha = Convert.ToDateTime(reader["Fecha"]);
+                            MessageBox.Show("Partida registrada con éxito");
+                        }                     
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                }
+
+                SqlCommand cmd3 = new SqlCommand("sp_InsertarResultado", cn);
+                cmd3.CommandType = CommandType.StoredProcedure;
+
+                cmd3.Parameters.AddWithValue("@id_partida", nueva.IdPartida);
+                cmd3.Parameters.AddWithValue("@id_jugador", idJugador);
+                cmd3.Parameters.AddWithValue("@es_ganador", 0);
+                try
+                {
+                    cmd3.ExecuteNonQuery();
+                    MessageBox.Show("resultado exitoso");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                }
+                return;
             }
+            cn.Close();
         }
 
         private void NuevaFraseAleatoria()
@@ -255,6 +341,9 @@ namespace Bingo_Design_Patterns
             var listaPatrones = patrones.Keys.ToList();
             patronCorrecto = listaPatrones[random.Next(listaPatrones.Count)];
             fraseActual = patrones[patronCorrecto];
+
+           
+            MarcarEnMaquina(patronCorrecto);
             this.Invalidate();
         }
 
@@ -282,6 +371,13 @@ namespace Bingo_Design_Patterns
         private void btnNuevaFrase_Click(object sender, EventArgs e)
         {
             NuevaFraseAleatoria();
+            try
+            { dgvPatrones.Rows.Add(patronCorrecto); }
+            catch 
+            {
+                MessageBox.Show("ERROR:");
+            }
+            
         }
 
         private void timerJuego_Tick(object sender, EventArgs e)
@@ -300,7 +396,8 @@ namespace Bingo_Design_Patterns
         }
 
         private void BotonBingo_Click(object sender, EventArgs e)
-        {       
+        {
+           
             if (!(sender is Button boton)) return;
             if (!boton.Enabled) return;
 
@@ -317,7 +414,51 @@ namespace Bingo_Design_Patterns
                 // Verificar si el jugador hizo BINGO por fila
                 if (VerificarBingoPorFila(botonesJugador))
                 {
-                    ManejarVictoria("¡Correcto! Hiciste BINGO (fila completada).");
+                    cn.Open();
+                    string estado = "Completada";
+
+                    SqlCommand cmd2 = new SqlCommand("sp_RegistroPartida", cn);
+                    cmd2.CommandType = CommandType.StoredProcedure;
+
+                    cmd2.Parameters.AddWithValue("@estado", estado);
+
+                    try
+                    {
+                        using (SqlDataReader reader = cmd2.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                nueva.IdPartida = Convert.ToInt32(reader["IdPartida"]);
+                                nueva.Estado = reader["Estado"].ToString();
+                                nueva.Fecha = Convert.ToDateTime(reader["Fecha"]);
+                                MessageBox.Show("Partida registrada con éxito");
+                            }
+                            idPartida = nueva.IdPartida;
+                        }                  
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error : " + ex.Message);
+                    }
+
+                    SqlCommand cmd3 = new SqlCommand("sp_InsertarResultado", cn);
+                    cmd3.CommandType = CommandType.StoredProcedure;
+
+                    cmd3.Parameters.AddWithValue("@id_partida", nueva.IdPartida);
+                    cmd3.Parameters.AddWithValue("@id_jugador", idJugador);
+                    cmd3.Parameters.AddWithValue("@es_ganador", 1);
+                    try
+                    {
+                        cmd3.ExecuteNonQuery();
+                        MessageBox.Show("resultado exitoso");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error : " + ex.Message);
+                    }
+                    return;
+
+                    ManejarVictoria("¡Correcto! Hiciste BINGO (fila completada).");          
                     return;
                 }
 
@@ -332,6 +473,82 @@ namespace Bingo_Design_Patterns
             }
         }
 
-       
+        private void dgvPatrones_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cn.Close();
+            if (e.RowIndex < 0) return;
+
+            string palabra = dgvPatrones.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+            MarcarEnTableroJugador(palabra); // ✔ AHORA MARCA TAMBIÉN AL JUGADOR
+            MarcarEnMaquina(palabra);
+
+            if (VerificarBingoPorFila(botonesJugador))
+            {
+                ManejarVictoria("¡Correcto! Hiciste BINGO (fila completada).");
+               cn.Open();
+                string estado = "Completada";
+
+                SqlCommand cmd2 = new SqlCommand("sp_RegistroPartida", cn);
+                cmd2.CommandType = CommandType.StoredProcedure;
+
+                cmd2.Parameters.AddWithValue("@estado", estado);
+
+                try
+                {
+                    using (SqlDataReader reader = cmd2.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            nueva.IdPartida = Convert.ToInt32(reader["IdPartida"]);
+                            nueva.Estado = reader["Estado"].ToString();
+                            nueva.Fecha = Convert.ToDateTime(reader["Fecha"]);
+                            MessageBox.Show("Partida registrada con éxito");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                }
+
+                SqlCommand cmd3 = new SqlCommand("sp_InsertarResultado", cn);
+                cmd3.CommandType = CommandType.StoredProcedure;
+
+                cmd3.Parameters.AddWithValue("@id_partida", nueva.IdPartida);
+                cmd3.Parameters.AddWithValue("@id_jugador", idJugador);
+                cmd3.Parameters.AddWithValue("@es_ganador", 1);
+                try
+                {
+                    cmd3.ExecuteNonQuery();
+                    MessageBox.Show("resultado exitoso");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                }
+                return;
+
+            }
+
+            if (VerificarBingoPorFila(botonesMaquina))
+            {
+                ManejarVictoria("La máquina hizo BINGO (fila completada).");
+                return;
+            }
+        }
+
+        private void MarcarEnTableroJugador(string palabra)
+        {
+            foreach (Control control in panelBingo.Controls)
+            {
+                if (control is Button btn && btn.Tag?.ToString() == palabra && btn.Enabled)
+                {
+                    btn.BackColor = Color.LightGreen;
+                    btn.Enabled = false; // ✔ MUY IMPORTANTE
+                    return;
+                }
+            }
+        }
     }
 }

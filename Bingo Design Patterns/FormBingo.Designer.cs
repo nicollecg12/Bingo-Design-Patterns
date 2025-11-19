@@ -101,8 +101,11 @@
             this.lblTiempo = new System.Windows.Forms.Label();
             this.lblTipoUsuario = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.dgvPatrones = new System.Windows.Forms.DataGridView();
+            this.label4 = new System.Windows.Forms.Label();
             this.panelBingo.SuspendLayout();
             this.panelBingo2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPatrones)).BeginInit();
             this.SuspendLayout();
             // 
             // button2
@@ -894,12 +897,35 @@
             this.label1.TabIndex = 48;
             this.label1.Text = "Oponente Aleatorio";
             // 
+            // dgvPatrones
+            // 
+            this.dgvPatrones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPatrones.Location = new System.Drawing.Point(44, 64);
+            this.dgvPatrones.Name = "dgvPatrones";
+            this.dgvPatrones.Size = new System.Drawing.Size(143, 150);
+            this.dgvPatrones.TabIndex = 49;
+            this.dgvPatrones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPatrones_CellClick);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("MS Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(42, 49);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(125, 12);
+            this.label4.TabIndex = 50;
+            this.label4.Text = "Palabras Aleatorias;";
+            // 
             // FormBingo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1607, 771);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.dgvPatrones);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblTipoUsuario);
             this.Controls.Add(this.lblTiempo);
@@ -926,6 +952,7 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FormBingo_Paint);
             this.panelBingo.ResumeLayout(false);
             this.panelBingo2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPatrones)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1003,5 +1030,7 @@
         private System.Windows.Forms.Label lblTiempo;
         private System.Windows.Forms.Label lblTipoUsuario;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dgvPatrones;
+        private System.Windows.Forms.Label label4;
     }
 }

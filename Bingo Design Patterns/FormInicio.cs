@@ -27,7 +27,7 @@ namespace Bingo_Design_Patterns
 
                 if (encontrado)
                 {
-                    FormBingo formBingo = new FormBingo();
+                    FormBingo formBingo = new FormBingo(user);
                     formBingo.Show();
                     this.Hide();
                 }

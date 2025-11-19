@@ -48,8 +48,7 @@ namespace Bingo_Design_Patterns
 
                 while (dr.Read())
                 {
-                   // int id_jugador = Convert.ToInt32(dr["id_jugador"]);
-                   // DateTime fecha_registro = Convert.ToDateTime(dr["id_jugador"]);
+                   
                     string nombre = dr["nombre_Completo"].ToString();
                     string user = dr["loginName"].ToString();
                     string contraseña = dr["contrasena_hash"].ToString();

@@ -61,6 +61,12 @@
     <Compile Include="FormAdministrador.Designer.cs">
       <DependentUpon>FormAdministrador.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormAdministrarPalabras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAdministrarPalabras.Designer.cs">
+      <DependentUpon>FormAdministrarPalabras.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormBingo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormAdministrador.resx">
       <DependentUpon>FormAdministrador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAdministrarPalabras.resx">
+      <DependentUpon>FormAdministrarPalabras.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormBingo.resx">
       <DependentUpon>FormBingo.cs</DependentUpon>

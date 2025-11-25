@@ -946,6 +946,7 @@
             this.Controls.Add(this.button59);
             this.Controls.Add(this.button29);
             this.Controls.Add(this.button30);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormBingo";
             this.Text = "FormBingo";
             this.Load += new System.EventHandler(this.FormBingo_Load);

@@ -35,12 +35,7 @@
             this.btnAdministrarPalabras = new System.Windows.Forms.Button();
             this.btnAgregarAdministrador = new System.Windows.Forms.Button();
             this.dgvListaUsuarios = new System.Windows.Forms.DataGridView();
-            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Usuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Contraseña = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PartidasGanadas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSalir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaUsuarios)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,6 +74,7 @@
             this.btnEliminarUsuario.TabIndex = 11;
             this.btnEliminarUsuario.Text = "Eliminar usuario";
             this.btnEliminarUsuario.UseVisualStyleBackColor = false;
+            this.btnEliminarUsuario.Click += new System.EventHandler(this.btnEliminarUsuario_Click);
             // 
             // btnAdministrarPalabras
             // 
@@ -91,6 +87,7 @@
             this.btnAdministrarPalabras.TabIndex = 10;
             this.btnAdministrarPalabras.Text = "Administrar palabras";
             this.btnAdministrarPalabras.UseVisualStyleBackColor = false;
+            this.btnAdministrarPalabras.Click += new System.EventHandler(this.btnAdministrarPalabras_Click);
             // 
             // btnAgregarAdministrador
             // 
@@ -103,51 +100,28 @@
             this.btnAgregarAdministrador.TabIndex = 9;
             this.btnAgregarAdministrador.Text = "Agregar administrador";
             this.btnAgregarAdministrador.UseVisualStyleBackColor = false;
+            this.btnAgregarAdministrador.Click += new System.EventHandler(this.btnAgregarAdministrador_Click);
             // 
             // dgvListaUsuarios
             // 
             this.dgvListaUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvListaUsuarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Nombre,
-            this.Usuario,
-            this.Contraseña,
-            this.Telefono,
-            this.Rol,
-            this.PartidasGanadas});
-            this.dgvListaUsuarios.Location = new System.Drawing.Point(26, 152);
+            this.dgvListaUsuarios.Location = new System.Drawing.Point(39, 163);
             this.dgvListaUsuarios.Name = "dgvListaUsuarios";
-            this.dgvListaUsuarios.Size = new System.Drawing.Size(640, 220);
-            this.dgvListaUsuarios.TabIndex = 8;
+            this.dgvListaUsuarios.Size = new System.Drawing.Size(615, 209);
+            this.dgvListaUsuarios.TabIndex = 14;
             // 
-            // Nombre
+            // btnSalir
             // 
-            this.Nombre.HeaderText = "Nombre";
-            this.Nombre.Name = "Nombre";
-            // 
-            // Usuario
-            // 
-            this.Usuario.HeaderText = "Usuario";
-            this.Usuario.Name = "Usuario";
-            // 
-            // Contraseña
-            // 
-            this.Contraseña.HeaderText = "Contraseña";
-            this.Contraseña.Name = "Contraseña";
-            // 
-            // Telefono
-            // 
-            this.Telefono.HeaderText = "Telefono";
-            this.Telefono.Name = "Telefono";
-            // 
-            // Rol
-            // 
-            this.Rol.HeaderText = "Rol";
-            this.Rol.Name = "Rol";
-            // 
-            // PartidasGanadas
-            // 
-            this.PartidasGanadas.HeaderText = "Partidas Ganadas";
-            this.PartidasGanadas.Name = "PartidasGanadas";
+            this.btnSalir.BackColor = System.Drawing.Color.Firebrick;
+            this.btnSalir.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.ForeColor = System.Drawing.Color.White;
+            this.btnSalir.Location = new System.Drawing.Point(387, 378);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(95, 33);
+            this.btnSalir.TabIndex = 15;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // FormAdministrador
             // 
@@ -155,14 +129,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(902, 435);
+            this.Controls.Add(this.btnSalir);
+            this.Controls.Add(this.dgvListaUsuarios);
             this.Controls.Add(this.btnGenerarReporte);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnEliminarUsuario);
             this.Controls.Add(this.btnAdministrarPalabras);
             this.Controls.Add(this.btnAgregarAdministrador);
-            this.Controls.Add(this.dgvListaUsuarios);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormAdministrador";
             this.Text = "FormAdministrador";
+            this.Load += new System.EventHandler(this.FormAdministrador_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaUsuarios)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -177,11 +154,6 @@
         private System.Windows.Forms.Button btnAdministrarPalabras;
         private System.Windows.Forms.Button btnAgregarAdministrador;
         private System.Windows.Forms.DataGridView dgvListaUsuarios;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Usuario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Contraseña;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Rol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PartidasGanadas;
+        private System.Windows.Forms.Button btnSalir;
     }
 }

@@ -53,5 +53,16 @@ namespace Bingo_Design_Patterns
             return con;
 
         }
+
+
+        public string CadenaConexion
+        {
+            get
+            {
+                return "Data Source=" + "." +
+                       "; Initial Catalog=" + this.Base +
+                       "; Integrated Security=True; trustservercertificate=true";
+            }
+        }
     }
 }

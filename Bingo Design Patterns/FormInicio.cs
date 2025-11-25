@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace Bingo_Design_Patterns
 {
     public partial class FormInicio : Form
     {
+        SqlConnection cn = ConexionBD.CrearInstancia().CrearConexion();
         public FormInicio()
         {
             InitializeComponent();
@@ -27,9 +29,39 @@ namespace Bingo_Design_Patterns
 
                 if (encontrado)
                 {
-                    FormBingo formBingo = new FormBingo(user);
-                    formBingo.Show();
-                    this.Hide();
+                    cn.Open();
+                    string rol;
+                    string query = "select rol from usuario where loginName = @loginName;";
+                    
+                    using (SqlCommand cmd = new SqlCommand(query, cn))
+                    {
+                        string resultado;
+                        cmd.Parameters.AddWithValue("@loginName", user);
+
+                        object result = cmd.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            resultado = Convert.ToString(result);
+                            
+                        }
+                            resultado = Convert.ToString(result);
+                        rol = resultado;
+                    }
+                    
+                    if (rol == "Administrador")
+                    {
+                       FormAdministrador formAdministrador = new FormAdministrador();
+                        formAdministrador.Show();
+                        this.Hide();
+                    }
+                    else 
+                    {
+                        FormBingo formBingo = new FormBingo(user);
+                        formBingo.Show();
+                        this.Hide();
+                    }
+                    
                 }
                 else
                 {

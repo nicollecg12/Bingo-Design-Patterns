@@ -64,7 +64,7 @@ namespace Bingo_Design_Patterns
                     }
                     else
                     {
-                        u = new Jugador(nombre, edad, numero, user, contraseña, tipo);
+                        u = new Jugador(nombre,edad,numero,user,contraseña,tipo);
                     }
 
                     lista.Add(u);

@@ -75,6 +75,7 @@
             this.btnSalir.TabIndex = 42;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnAgregarAdmin
             // 
@@ -87,6 +88,7 @@
             this.btnAgregarAdmin.TabIndex = 41;
             this.btnAgregarAdmin.Text = "Agregar Admin";
             this.btnAgregarAdmin.UseVisualStyleBackColor = false;
+            this.btnAgregarAdmin.Click += new System.EventHandler(this.btnAgregarAdmin_Click);
             // 
             // txtNumeroTelefonico
             // 

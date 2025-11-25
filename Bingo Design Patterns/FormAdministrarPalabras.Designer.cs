@@ -32,9 +32,6 @@
             this.btnEliminarPatron = new System.Windows.Forms.Button();
             this.btnModificarPatron = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.dgvListaPalabras = new System.Windows.Forms.DataGridView();
-            this.NombreDelPatron = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FrasePista = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnAñadirPatron = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,7 +39,8 @@
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.txtPatron = new System.Windows.Forms.TextBox();
             this.lblAdministrarPalabras = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvListaPalabras)).BeginInit();
+            this.dgvPatrones = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPatrones)).BeginInit();
             this.SuspendLayout();
             // 
             // btnEliminarPatron
@@ -56,6 +54,7 @@
             this.btnEliminarPatron.TabIndex = 47;
             this.btnEliminarPatron.Text = "Eliminar";
             this.btnEliminarPatron.UseVisualStyleBackColor = false;
+            this.btnEliminarPatron.Click += new System.EventHandler(this.btnEliminarPatron_Click);
             // 
             // btnModificarPatron
             // 
@@ -68,6 +67,7 @@
             this.btnModificarPatron.TabIndex = 46;
             this.btnModificarPatron.Text = "Modificar";
             this.btnModificarPatron.UseVisualStyleBackColor = false;
+            this.btnModificarPatron.Click += new System.EventHandler(this.btnModificarPatron_Click);
             // 
             // label3
             // 
@@ -81,27 +81,6 @@
             this.label3.TabIndex = 45;
             this.label3.Text = "Agregar nuevo patrón";
             // 
-            // dgvListaPalabras
-            // 
-            this.dgvListaPalabras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvListaPalabras.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NombreDelPatron,
-            this.FrasePista});
-            this.dgvListaPalabras.Location = new System.Drawing.Point(288, 166);
-            this.dgvListaPalabras.Name = "dgvListaPalabras";
-            this.dgvListaPalabras.Size = new System.Drawing.Size(243, 125);
-            this.dgvListaPalabras.TabIndex = 44;
-            // 
-            // NombreDelPatron
-            // 
-            this.NombreDelPatron.HeaderText = "Nombre del patrón";
-            this.NombreDelPatron.Name = "NombreDelPatron";
-            // 
-            // FrasePista
-            // 
-            this.FrasePista.HeaderText = "Descripción";
-            this.FrasePista.Name = "FrasePista";
-            // 
             // btnSalir
             // 
             this.btnSalir.BackColor = System.Drawing.Color.Firebrick;
@@ -113,6 +92,7 @@
             this.btnSalir.TabIndex = 43;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnAñadirPatron
             // 
@@ -125,6 +105,7 @@
             this.btnAñadirPatron.TabIndex = 42;
             this.btnAñadirPatron.Text = "Añadir Patrón";
             this.btnAñadirPatron.UseVisualStyleBackColor = false;
+            this.btnAñadirPatron.Click += new System.EventHandler(this.btnAñadirPatron_Click);
             // 
             // label2
             // 
@@ -178,16 +159,25 @@
             this.lblAdministrarPalabras.TabIndex = 37;
             this.lblAdministrarPalabras.Text = "Administrar palabras";
             // 
+            // dgvPatrones
+            // 
+            this.dgvPatrones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPatrones.Location = new System.Drawing.Point(281, 167);
+            this.dgvPatrones.Name = "dgvPatrones";
+            this.dgvPatrones.Size = new System.Drawing.Size(257, 121);
+            this.dgvPatrones.TabIndex = 48;
+            this.dgvPatrones.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPatrones_CellClick);
+            // 
             // FormAdministrarPalabras
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(600, 581);
+            this.Controls.Add(this.dgvPatrones);
             this.Controls.Add(this.btnEliminarPatron);
             this.Controls.Add(this.btnModificarPatron);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.dgvListaPalabras);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnAñadirPatron);
             this.Controls.Add(this.label2);
@@ -195,9 +185,11 @@
             this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.txtPatron);
             this.Controls.Add(this.lblAdministrarPalabras);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormAdministrarPalabras";
-            this.Text = "FormAdministrarPalabras";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvListaPalabras)).EndInit();
+            this.Text = " ";
+            this.Load += new System.EventHandler(this.FormAdministrarPalabras_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPatrones)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -208,9 +200,6 @@
         private System.Windows.Forms.Button btnEliminarPatron;
         private System.Windows.Forms.Button btnModificarPatron;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dgvListaPalabras;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NombreDelPatron;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FrasePista;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Button btnAñadirPatron;
         private System.Windows.Forms.Label label2;
@@ -218,5 +207,6 @@
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.TextBox txtPatron;
         private System.Windows.Forms.Label lblAdministrarPalabras;
+        private System.Windows.Forms.DataGridView dgvPatrones;
     }
 }

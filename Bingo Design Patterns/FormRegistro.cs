@@ -32,7 +32,6 @@ namespace Bingo_Design_Patterns
             string numero = txtNumeroTelefonico.Text;
             string user = txtNombreUsuario.Text;
             string contraseña = txtContraseña.Text;
-            string correo = txtCorreo.Text;
         
 
             try

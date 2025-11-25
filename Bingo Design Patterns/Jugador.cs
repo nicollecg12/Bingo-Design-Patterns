@@ -9,8 +9,16 @@ namespace Bingo_Design_Patterns
 {
     public class Jugador:Usuario
     {
-       public  Jugador (string nombre, int edad,string numero, string user, string contraseña,string tipo) : base (nombre, edad,numero, user, contraseña,tipo) 
+       public  Jugador (string nombre, int edad,string numero, string user, string contraseña,string tipo ) : base (nombre, edad,numero, user, contraseña,tipo) 
         { 
+        }
+
+        public Jugador(int idJugador,string nombre, int edad, string numero, string user , DateTime Fecha_registro) :base(idJugador,nombre,edad,numero,user,Fecha_registro)
+        {
+        }
+        public interface IClienteActivoRepository
+        {
+            List<Jugador> ObtenerTodos();
         }
         public override string VerificarCreacion()
         {

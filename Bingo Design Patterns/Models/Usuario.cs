@@ -32,20 +32,23 @@ namespace Bingo_Design_Patterns
 
         public Usuario(int idJugador, string nombre, int edad, string numero, string user, DateTime Fecha_registro)
         {
-            if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(user) || string.IsNullOrWhiteSpace(contraseña) || string.IsNullOrWhiteSpace(numero))
+            if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(user)  || string.IsNullOrWhiteSpace(numero))
             {
                 throw new ArgumentException("No puede dejar campos vacíos");
+              
             } 
             if (user.Length < 3)
             {
                 throw new ArgumentException("El nombre de usuario debe contener al menos 3 caracteres");
+                
             }
             if (edad < 12)
             {
                 throw new ArgumentException("Debe tener al menos 12 años");
+               
             }
 
-            idUsuario = IdUsuario;
+            idUsuario = idJugador;
             Nombre = nombre;
             User = user;
             Edad = edad;

@@ -47,69 +47,78 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Administrador.cs" />
-    <Compile Include="ClienteActivoRepository.cs" />
+    <Compile Include="Repository\IPalabraRepository.cs" />
+    <Compile Include="Models\Administrador.cs" />
+    <Compile Include="Repository\ClienteActivoRepository.cs" />
     <Compile Include="ConexionBD.cs" />
-    <Compile Include="FormAdministrador.cs">
+    <Compile Include="Forms\FormAdministrador.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAdministrador.Designer.cs">
+    <Compile Include="Forms\FormAdministrador.Designer.cs">
       <DependentUpon>FormAdministrador.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormAdministrarPalabras.cs">
+    <Compile Include="Forms\FormAdministrarPalabras.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAdministrarPalabras.Designer.cs">
+    <Compile Include="Forms\FormAdministrarPalabras.Designer.cs">
       <DependentUpon>FormAdministrarPalabras.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormBingo.cs">
+    <Compile Include="Forms\FormBingo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormBingo.Designer.cs">
+    <Compile Include="Forms\FormBingo.Designer.cs">
       <DependentUpon>FormBingo.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormInicio.cs">
+    <Compile Include="Forms\FormInicio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormInicio.Designer.cs">
+    <Compile Include="Forms\FormInicio.Designer.cs">
       <DependentUpon>FormInicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormRegistro.cs">
+    <Compile Include="Forms\FormRegistro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormRegistro.Designer.cs">
+    <Compile Include="Forms\FormRegistro.Designer.cs">
       <DependentUpon>FormRegistro.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormRegistroAdministrador.cs">
+    <Compile Include="Forms\FormRegistroAdministrador.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormRegistroAdministrador.Designer.cs">
+    <Compile Include="Forms\FormRegistroAdministrador.Designer.cs">
       <DependentUpon>FormRegistroAdministrador.cs</DependentUpon>
     </Compile>
     <Compile Include="GestorUsuarios.cs" />
-    <Compile Include="IClienteActivoRepository.cs" />
-    <Compile Include="Jugador.cs" />
-    <Compile Include="Partida.cs" />
+    <Compile Include="Repository\IClienteActivoRepository.cs" />
+    <Compile Include="Models\Jugador.cs" />
+    <Compile Include="Models\Palabra.cs" />
+    <Compile Include="Models\Partida.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Usuario.cs" />
+    <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Repository\IPalabraRepository2.cs" />
+    <Compile Include="Repository\IUsuarioActivoRepository.cs" />
+    <Compile Include="Repository\IUsuarioRepository.cs" />
+    <Compile Include="Repository\PalabraRepository.cs" />
+    <Compile Include="Repository\PalabraRepository2.cs" />
+    <Compile Include="Repository\UsuarioActivoRepository.cs" />
+    <Compile Include="Repository\UsuarioRepository,cs.cs" />
     <Compile Include="UsuarioFactory.cs" />
-    <EmbeddedResource Include="FormAdministrador.resx">
+    <EmbeddedResource Include="Forms\FormAdministrador.resx">
       <DependentUpon>FormAdministrador.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormAdministrarPalabras.resx">
+    <EmbeddedResource Include="Forms\FormAdministrarPalabras.resx">
       <DependentUpon>FormAdministrarPalabras.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormBingo.resx">
+    <EmbeddedResource Include="Forms\FormBingo.resx">
       <DependentUpon>FormBingo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormInicio.resx">
+    <EmbeddedResource Include="Forms\FormInicio.resx">
       <DependentUpon>FormInicio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormRegistro.resx">
+    <EmbeddedResource Include="Forms\FormRegistro.resx">
       <DependentUpon>FormRegistro.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormRegistroAdministrador.resx">
+    <EmbeddedResource Include="Forms\FormRegistroAdministrador.resx">
       <DependentUpon>FormRegistroAdministrador.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

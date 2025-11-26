@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bingo_Design_Patterns.Repository;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,11 +15,12 @@ namespace Bingo_Design_Patterns
 {
     public partial class FormAdministrarPalabras : Form
     {
+        private readonly IPalabraRepository2 _repo;
         SqlConnection cn = ConexionBD.CrearInstancia().CrearConexion();
         public FormAdministrarPalabras()
         {
             InitializeComponent();
-           
+            _repo = new PalabraRepository2(ConexionBD.con.CadenaConexion);
         }
 
         private void btnEliminarPatron_Click(object sender, EventArgs e)
@@ -26,7 +28,7 @@ namespace Bingo_Design_Patterns
             if (dgvPatrones.SelectedRows.Count > 0)
             {
                 cn.Open();
-                int idPalabra = Convert.ToInt32(dgvPatrones.SelectedRows[0].Cells["id_palabra"].Value);
+                int idPalabra = Convert.ToInt32(dgvPatrones.SelectedRows[0].Cells["IdPalabra"].Value);
 
                 DialogResult result = MessageBox.Show(
                     "¿Está seguro de eliminar esta palabra?",
@@ -69,16 +71,8 @@ namespace Bingo_Design_Patterns
 
         public void CargarDatos()
         {
-            string query = "SELECT * FROM Palabra";
-
-            using (SqlConnection conn = new SqlConnection(ConexionBD.con.CadenaConexion))
-            {
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                dgvPatrones.DataSource = dt;
-            }
+            var lista = _repo.GetAll();
+            dgvPatrones.DataSource = lista;
         }
 
         private void btnModificarPatron_Click(object sender, EventArgs e)
@@ -86,7 +80,7 @@ namespace Bingo_Design_Patterns
             if (dgvPatrones.SelectedRows.Count > 0)
             {
                 cn.Open();
-                int idPalabra = Convert.ToInt32(dgvPatrones.SelectedRows[0].Cells["id_palabra"].Value);
+                int idPalabra = Convert.ToInt32(dgvPatrones.SelectedRows[0].Cells["IdPalabra"].Value);
 
                 DialogResult result = MessageBox.Show(
                     "¿Está seguro de modificar esta palabra?",
@@ -134,9 +128,9 @@ namespace Bingo_Design_Patterns
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow fila = dgvPatrones.Rows[e.RowIndex];
-
-                txtPatron.Text = fila.Cells["palabra"].Value.ToString();
-                txtDescripcion.Text = fila.Cells["frase"].Value.ToString();
+                int id = Convert.ToInt32(fila.Cells["IdPalabra"].Value);
+                txtPatron.Text = fila.Cells["palabra1"].Value.ToString();
+                txtDescripcion.Text = fila.Cells["Frase"].Value.ToString();
             }
         }
 
@@ -171,6 +165,7 @@ namespace Bingo_Design_Patterns
                 {
                     cn.Close();
                 }
+                CargarDatos();
                 Limpiar();
             }
         }

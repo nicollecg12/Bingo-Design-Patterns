@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bingo_Design_Patterns.Repository;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,10 +14,12 @@ namespace Bingo_Design_Patterns
 {
     public partial class FormInicio : Form
     {
+        private readonly IUsuarioRepository _usuarioRepository;
         SqlConnection cn = ConexionBD.CrearInstancia().CrearConexion();
         public FormInicio()
         {
             InitializeComponent();
+            _usuarioRepository = new UsuarioRepository(ConexionBD.con.CadenaConexion);
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -30,38 +33,28 @@ namespace Bingo_Design_Patterns
                 if (encontrado)
                 {
                     cn.Open();
-                    string rol;
-                    string query = "select rol from usuario where loginName = @loginName;";
-                    
-                    using (SqlCommand cmd = new SqlCommand(query, cn))
+                    string rol = _usuarioRepository.ObtenerRol(user);
+
+                    if (rol == null)
                     {
-                        string resultado;
-                        cmd.Parameters.AddWithValue("@loginName", user);
-
-                        object result = cmd.ExecuteScalar();
-
-                        if (result != null)
-                        {
-                            resultado = Convert.ToString(result);
-                            
-                        }
-                            resultado = Convert.ToString(result);
-                        rol = resultado;
+                        MessageBox.Show("Usuario no encontrado o sin rol.",
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
-                    
+
                     if (rol == "Administrador")
                     {
-                       FormAdministrador formAdministrador = new FormAdministrador();
+                        var formAdministrador = new FormAdministrador();
                         formAdministrador.Show();
                         this.Hide();
                     }
-                    else 
+                    else
                     {
-                        FormBingo formBingo = new FormBingo(user);
+                        var formBingo = new FormBingo(user);
                         formBingo.Show();
                         this.Hide();
                     }
-                    
+
                 }
                 else
                 {

@@ -34,8 +34,8 @@
             this.btnEliminarUsuario = new System.Windows.Forms.Button();
             this.btnAdministrarPalabras = new System.Windows.Forms.Button();
             this.btnAgregarAdministrador = new System.Windows.Forms.Button();
-            this.dgvListaUsuarios = new System.Windows.Forms.DataGridView();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.dgvListaUsuarios = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListaUsuarios)).BeginInit();
             this.SuspendLayout();
             // 
@@ -102,14 +102,6 @@
             this.btnAgregarAdministrador.UseVisualStyleBackColor = false;
             this.btnAgregarAdministrador.Click += new System.EventHandler(this.btnAgregarAdministrador_Click);
             // 
-            // dgvListaUsuarios
-            // 
-            this.dgvListaUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvListaUsuarios.Location = new System.Drawing.Point(39, 163);
-            this.dgvListaUsuarios.Name = "dgvListaUsuarios";
-            this.dgvListaUsuarios.Size = new System.Drawing.Size(615, 209);
-            this.dgvListaUsuarios.TabIndex = 14;
-            // 
             // btnSalir
             // 
             this.btnSalir.BackColor = System.Drawing.Color.Firebrick;
@@ -123,14 +115,22 @@
             this.btnSalir.UseVisualStyleBackColor = false;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // dgvListaUsuarios
+            // 
+            this.dgvListaUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListaUsuarios.Location = new System.Drawing.Point(56, 163);
+            this.dgvListaUsuarios.Name = "dgvListaUsuarios";
+            this.dgvListaUsuarios.Size = new System.Drawing.Size(569, 173);
+            this.dgvListaUsuarios.TabIndex = 16;
+            // 
             // FormAdministrador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(902, 435);
-            this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.dgvListaUsuarios);
+            this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnGenerarReporte);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnEliminarUsuario);
@@ -153,7 +153,7 @@
         private System.Windows.Forms.Button btnEliminarUsuario;
         private System.Windows.Forms.Button btnAdministrarPalabras;
         private System.Windows.Forms.Button btnAgregarAdministrador;
-        private System.Windows.Forms.DataGridView dgvListaUsuarios;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.DataGridView dgvListaUsuarios;
     }
 }

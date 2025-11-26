@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bingo_Design_Patterns.Repository;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,13 +14,15 @@ namespace Bingo_Design_Patterns
 {
     public partial class FormAdministrador : Form
     {
-        private readonly IClienteActivoRepository _repo; 
+      
+        private readonly IUsuarioActivoRepository _repoUsuarios;
         SqlConnection cn = ConexionBD.CrearInstancia().CrearConexion();
         public FormAdministrador()
         {
             InitializeComponent();
+            _repoUsuarios = new UsuarioActivoRepository(ConexionBD.con.CadenaConexion);
 
-            _repo = new ClienteActivoRepository(ConexionBD.con.CadenaConexion);
+           
         }
 
         private void btnEliminarUsuario_Click(object sender, EventArgs e)
@@ -68,17 +71,9 @@ namespace Bingo_Design_Patterns
         }
         private void CargarDatos()
         {
-           
-            string query = "SELECT * FROM vwUsuariosActivos";
 
-            using (SqlConnection conn = new SqlConnection(ConexionBD.con.CadenaConexion))
-            {
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                dgvListaUsuarios.DataSource = dt;
-            }
+            var lista = _repoUsuarios.GetAll();
+            dgvListaUsuarios.DataSource = lista;
         }
 
         private void FormAdministrador_Load(object sender, EventArgs e)
@@ -105,8 +100,8 @@ namespace Bingo_Design_Patterns
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            FormAdministrador formRegistro = new FormAdministrador();
-            formRegistro.Show();
+            FormInicio formInicio = new FormInicio();
+            formInicio.Show();
             this.Hide();
         }
     }

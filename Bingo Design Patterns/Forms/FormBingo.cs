@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bingo_Design_Patterns.Repository;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,7 +12,9 @@ namespace Bingo_Design_Patterns
     public partial class FormBingo : Form
     {
         SqlConnection cn = ConexionBD.CrearInstancia().CrearConexion();
-        Dictionary<string, string> patrones = new Dictionary<string, string>();
+        private readonly IPalabraRepository _palabraRepository;
+
+
         private string fraseActual;
         private string patronCorrecto;
         private Random random = new Random();
@@ -30,26 +33,19 @@ namespace Bingo_Design_Patterns
             InitializeComponent();
             login = loginName;
             cn.Open();
-         
+
+            _palabraRepository = new PalabraRepository(ConexionBD.con.CadenaConexion);
+
             
-            string query = "SELECT palabra, frase FROM Palabra";
 
-            using (SqlCommand cmd = new SqlCommand(query, cn))
-            using (SqlDataReader reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    string nombre = reader.GetString(0);
-                    string descripcion = reader.GetString(1);
+            
+           
 
-                    patrones[nombre] = descripcion;
-                }
-            }
-       
         }
 
         private void FormBingo_Load(object sender, EventArgs e)
         {
+            Dictionary<string, string> patrones = _palabraRepository.ObtenerPatrones();
             var textos = patrones.Keys.OrderBy(x => random.Next()).ToList();
             int indice = 0;
 
@@ -108,8 +104,7 @@ namespace Bingo_Design_Patterns
             var dgv = dgvPatrones;
 
             dgv.BorderStyle = BorderStyle.None;
-            dgv.BackgroundColor = Color.FromArgb(5, 50, 80);         // Fondo igual a tu tema azul
-            dgv.GridColor = Color.FromArgb(180, 220, 240);           // Líneas suaves
+            dgv.BackgroundColor = Color.FromArgb(5, 50, 80);         
 
             dgv.EnableHeadersVisualStyles = false;
             dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(0, 120, 200);
@@ -143,17 +138,15 @@ namespace Bingo_Design_Patterns
         }
         private void InicializarMatricesDeBotones()
         {
-            // Crea matrices
+            
             botonesJugador = new Button[TAM, TAM];
             botonesMaquina = new Button[TAM, TAM];
 
-            // Rellenar la matriz leyendo controles en el orden en que están añadidos al Panel.
-            // Se asume orden: fila0col0, fila0col1, ..., fila0col4, fila1col0, ...
-            // Si tu Layout de panel no respeta ese orden, podrías ordenarlos por posición (Top, Left).
+           
             var botonesPanelJugador = panelBingo.Controls.OfType<Button>().OrderBy(b => b.Top).ThenBy(b => b.Left).ToList();
             var botonesPanelMaquina = panelBingo2.Controls.OfType<Button>().OrderBy(b => b.Top).ThenBy(b => b.Left).ToList();
 
-            // Rellenar matriz jugador
+
             for (int i = 0; i < Math.Min(botonesPanelJugador.Count, TAM * TAM); i++)
             {
                 int fila = i / TAM;
@@ -161,7 +154,7 @@ namespace Bingo_Design_Patterns
                 botonesJugador[fila, col] = botonesPanelJugador[i];
             }
 
-            // Rellenar matriz máquina
+            
             for (int i = 0; i < Math.Min(botonesPanelMaquina.Count, TAM * TAM); i++)
             {
                 int fila = i / TAM;
@@ -185,8 +178,8 @@ namespace Bingo_Design_Patterns
             for (int col = 0; col < TAM; col++)
             {
                 var btn = matriz[fila, col];
-                if (btn == null) return false;      // defensivo
-                                                    // consideramos marcado si está deshabilitado (como en tu lógica)
+                if (btn == null) return false;      
+                                                    
                 if (btn.Enabled) return false;
             }
             return true;
@@ -222,7 +215,7 @@ namespace Bingo_Design_Patterns
             segundosJugados = 0;
             lblTiempo.Text = "Tiempo: 00:00";
 
-            // Habilitar botones y poner color normal
+            
             foreach (var b in botonesJugador)
             {
                 if (b != null)
@@ -241,7 +234,7 @@ namespace Bingo_Design_Patterns
                 }
             }
 
-            // Rebarajar paneles
+           
             FormBingo_Load(null, null);
 
             NuevaFraseAleatoria();
@@ -338,6 +331,7 @@ namespace Bingo_Design_Patterns
 
         private void NuevaFraseAleatoria()
         {
+            Dictionary<string, string> patrones = _palabraRepository.ObtenerPatrones();
             var listaPatrones = patrones.Keys.ToList();
             patronCorrecto = listaPatrones[random.Next(listaPatrones.Count)];
             fraseActual = patrones[patronCorrecto];
@@ -375,7 +369,7 @@ namespace Bingo_Design_Patterns
             { dgvPatrones.Rows.Add(patronCorrecto); }
             catch 
             {
-                MessageBox.Show("ERROR:");
+                MessageBox.Show(":)");
             }
             
         }
@@ -408,10 +402,10 @@ namespace Bingo_Design_Patterns
                 boton.BackColor = Color.LightGreen;
                 boton.Enabled = false;
 
-                // Marcar también en la máquina (tu método ya lo hace)
+                
                 MarcarEnMaquina(patronCorrecto);
 
-                // Verificar si el jugador hizo BINGO por fila
+               
                 if (VerificarBingoPorFila(botonesJugador))
                 {
                     cn.Open();
@@ -480,7 +474,7 @@ namespace Bingo_Design_Patterns
 
             string palabra = dgvPatrones.Rows[e.RowIndex].Cells[0].Value.ToString();
 
-            MarcarEnTableroJugador(palabra); // ✔ AHORA MARCA TAMBIÉN AL JUGADOR
+            MarcarEnTableroJugador(palabra); 
             MarcarEnMaquina(palabra);
 
             if (VerificarBingoPorFila(botonesJugador))
@@ -545,7 +539,7 @@ namespace Bingo_Design_Patterns
                 if (control is Button btn && btn.Tag?.ToString() == palabra && btn.Enabled)
                 {
                     btn.BackColor = Color.LightGreen;
-                    btn.Enabled = false; // ✔ MUY IMPORTANTE
+                    btn.Enabled = false; 
                     return;
                 }
             }

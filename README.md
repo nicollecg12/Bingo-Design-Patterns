@@ -30,3 +30,7 @@ Samuel Machado Espitia | Desarrollo y conexión de la base de datos
 Ruta del script SQL
 --
 https://drive.google.com/file/d/1bdyImkR_EgLO2xZ6bgsubLRXarBANoEU/view?usp=sharing
+
+Video entrega final explicacion
+--
+https://drive.google.com/file/d/1b8YiguMKgKAipEb9qmmv1REU5bO9upst/view?usp=sharing 
